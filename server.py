@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request
+from flask import request,jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -57,24 +57,42 @@ def square(number):
 
 #SERVER THAT RECIEVE DATA 
 
-@app.route("/register",methods=["POST"])
+
+@app.route("/register", methods=["POST"])
 def register():
+
+    # 1️⃣ Get JSON safely
     data = request.get_json()
 
-    name = data["name"]
-    city = data["city"]
+    # If client didn't send JSON
+    if not data:
+        return jsonify({"error": "No JSON data received"}), 400
 
+    # 2️⃣ Get fields safely (no crash)
+    name = data.get("name")
+    city = data.get("city")
+
+    # 3️⃣ VALIDATION  ← ADD IT HERE
+    if not name or not city:
+        return jsonify({"error": "Missing name or city"}), 400
+
+    # 4️⃣ Database
     conn = sqlite3.connect("student.db")
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO student (name,city) VALUES(?,?)",
-        (name,city)
+        "INSERT INTO student (name, city) VALUES (?, ?)",
+        (name, city)
     )
 
     conn.commit()
     conn.close()
 
-    return f"student {name} saved succesfully"
+    # 5️⃣ Response
+    return jsonify({
+        "success": True,
+        "message": f"STUDENT {name} SAVED SUCCESSFULLY"
+    }), 201
 
-app.run()
+
+app.run(debug=True)
