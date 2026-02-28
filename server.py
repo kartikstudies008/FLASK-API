@@ -1,5 +1,7 @@
 from flask import Flask
-from flask import request,jsonify
+from flask import jsonify
+import requests
+from flask import render_template
 import sqlite3
 
 app = Flask(__name__)
@@ -94,5 +96,23 @@ def register():
         "message": f"STUDENT {name} SAVED SUCCESSFULLY"
     }), 201
 
+
+@app.route("/joke")
+def joke():
+
+    # Call external API
+    response = requests.get("https://official-joke-api.appspot.com/random_joke")
+
+    # Convert to JSON
+    data = response.json()
+
+    # Send to browser
+    return jsonify({
+        "setup": data["setup"],
+        "punchline": data["punchline"]
+    })
+@app.route("/joke-ui")
+def joke_ui():
+    return render_template("joke.html")
 
 app.run(debug=True)

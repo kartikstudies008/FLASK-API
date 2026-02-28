@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Joke Generator</title>
+</head>
+<body style="text-align:center; font-family:Arial; margin-top:100px;">
+
+    <h1>😂 Random Joke Generator</h1>
+
+    <button onclick="getJoke()" style="padding:10px 20px; font-size:18px;">
+        Get Joke
+    </button>
+
+    <h2 id="setup"></h2>
+    <h3 id="punchline" style="color:green;"></h3>
+
+<script>
+async function getJoke(){
+    const response = await fetch("/joke");
+    const data = await response.json();
+
+    document.getElementById("setup").innerText = data.setup;
+    document.getElementById("punchline").innerText = data.punchline;
+}
+</script>
+
+</body>
+</html>
