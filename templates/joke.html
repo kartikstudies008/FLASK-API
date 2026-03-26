@@ -1,4 +1,4 @@
-<!DOCTYPE html> // Standard HTML5 declaration
+<!DOCTYPE html> <!-- Standard HTML5 declaration -->
 <html>
 <head>
     <title>Joke Generator</title>
@@ -7,18 +7,24 @@
 
     <h1>😂 Random Joke Generator</h1>
 
+    <!-- Button that triggers the getJoke() function when clicked -->
     <button onclick="getJoke()" style="padding:10px 20px; font-size:18px;">
         Get Joke
     </button>
 
+    <!-- Placeholders that will be filled in by JavaScript -->
     <h2 id="setup"></h2>
     <h3 id="punchline" style="color:green;"></h3>
 
 <script>
+// Async function that fetches a joke from the /joke Flask endpoint
 async function getJoke(){
+    // Call the Flask /joke route which returns JSON with setup and punchline
     const response = await fetch("/joke");
+    // Parse the JSON response body
     const data = await response.json();
 
+    // Update the page elements with the joke text
     document.getElementById("setup").innerText = data.setup;
     document.getElementById("punchline").innerText = data.punchline;
 }
