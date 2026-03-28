@@ -6,10 +6,10 @@ import sqlite3
 
 app = Flask(__name__)
 def init_db():
-    conn = sqlite3.connect("student.db")
+    conn = sqlite3.connect("student.db")    #CONNECT TO DATABASE
     cursor = conn.cursor()
 
-    cursor.execute("""
+    cursor.execute("""                                 
 CREATE TABLE IF NOT EXISTS student(
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT,
