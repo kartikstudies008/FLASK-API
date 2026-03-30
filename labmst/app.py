@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = "kartik_secret"
 
 # session timeout = 30 seconds
-app.permanent_session_lifetime = timedelta(seconds=30)
+app.permanent_session_lifetime = timedelta(seconds=30)    # set session lifetime to 30 seconds
 
 
 @app.route("/")
