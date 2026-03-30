@@ -9,7 +9,7 @@ def home():
 
 
 # Step 2 : Servlet1 equivalent
-@app.route("/servlet1", methods=["GET", "POST"])
+@app.route("/servlet1", methods=["GET", "POST"])   # allow both GET and POST methods
 def servlet1():
 
     if request.method == "GET":
