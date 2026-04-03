@@ -5,7 +5,7 @@ import uuid
 app = Flask(__name__)
 
 # Secret key required for sessions
-app.secret_key = "kartik_secret_key"
+app.secret_key = "kartik_secret_key"                                  #DETERMINE 
 
 @app.route("/")
 def session_info():
