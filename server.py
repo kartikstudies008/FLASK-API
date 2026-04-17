@@ -6,7 +6,7 @@ import sqlite3
 
 app = Flask(__name__)
 def init_db():
-    conn = sqlite3.connect("student.db")    #CONNECT TO DATABASE
+    conn = sqlite3.connect("student.db")    #CONNECT TO DATABASE 1
     cursor = conn.cursor()
 
     cursor.execute("""                                 
